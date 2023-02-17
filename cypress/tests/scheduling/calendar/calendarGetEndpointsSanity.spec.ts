@@ -1,5 +1,6 @@
 import * as calendarEndpoints from './../../../services/scheduling/calendar/calendar.endpoints'
 import * as calendarAssertions from './../../../services/scheduling/calendar/calendar.assertions'
+import * as calendarHelpers from    './../../../services/scheduling/calendar/calendar.helpers'
 import * as commonAssertions from './../../../services/common.assertions'
 import { CONSTANTS } from '../../../helper'
 
@@ -14,9 +15,9 @@ describe('Calendar GET Endpoints - Sanity Tests', () => {
             request.then((response: any) => {
                 commonAssertions.assertIsSuccessfullGetArray(response);
                 calendarAssertions.assertGetAllCalendarEvents(response);
-                eventId = response.body[0].id;
-                appointmentId = getAppointmentId(response);
-                patientId = getPatientId(response);
+                eventId = calendarHelpers.getEventId(response);
+                appointmentId = calendarHelpers.getAppointmentId(response);
+                patientId = calendarHelpers.getPatientId(response);
             });
             commonAssertions.assertResponseJsonContentType(request);
         });
@@ -158,19 +159,3 @@ describe('Calendar GET Endpoints - Sanity Tests', () => {
         });
     });
 });
-
-function getAppointmentId(response: any) {
-    let appointmentIds: Number[] = [];
-    response.body.forEach ((item: any) => {
-        appointmentIds.push(item.type === 'Appointment' ? item.id : null);
-    });
-    return appointmentIds[0];
-};
-
-function getPatientId(response: any) {
-    let patientIds: Number[] = [];
-    response.body.forEach ((item: any) => {
-        patientIds.push(item.properties.Appointment.patientId);
-    });
-    return patientIds[0];
-};
