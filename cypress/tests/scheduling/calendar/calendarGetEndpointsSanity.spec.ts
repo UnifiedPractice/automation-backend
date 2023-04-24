@@ -11,136 +11,135 @@ describe('Calendar GET Endpoints - Sanity Tests', () => {
 
     context('calendar GET /calendar/events',  () => {
         it('should get all calendar events',  () => {
-            const request = calendarEndpoints.getAllCalendarEvents();
-            request.then((response: any) => {
+            const response = calendarEndpoints.getAllCalendarEvents();
+            response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullGetArray(response);
                 calendarAssertions.assertGetAllCalendarEvents(response);
                 eventId = calendarHelpers.getEventId(response);
                 appointmentId = calendarHelpers.getAppointmentId(response);
                 patientId = calendarHelpers.getPatientId(response);
             });
-            commonAssertions.assertResponseJsonContentType(request);
+            commonAssertions.assertResponseJsonContentType(response);
         });
 
      });
 
      context('calendar GET /calendar/events/{id}',  () => {
         it('should get a calendar event by its Id',  () => {
-            const request = calendarEndpoints.getCalendarEvent(eventId);
-            request.then((response: any) => {
+            const response = calendarEndpoints.getCalendarEvent(eventId);
+            response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullGet(response);
-                calendarAssertions.assertGetCalendarEvent(response);
-                expect(response.body.id).equal(eventId);
+                calendarAssertions.assertGetCalendarEvent(response, eventId);
             });     
-            commonAssertions.assertResponseJsonContentType(request);
+            commonAssertions.assertResponseJsonContentType(response);
         });
     });
 
     context('calendar GET /calendar/availabilities', () => {
         it('should get all calendar availabilities', () => {
-            const request = calendarEndpoints.getAllCalendarAvailabilities();
-            request.then((response: any) => {
+            const response = calendarEndpoints.getAllCalendarAvailabilities();
+            response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullGetArray(response);
                 calendarAssertions.assertGetAllCalendarAvailabilities(response);
             });
-            commonAssertions.assertResponseJsonContentType(request);
+            commonAssertions.assertResponseJsonContentType(response);
         });
     });
 
     context('calendar GET /calendar/availabilities/{resourceType}', () => {
         it('should get the calendar availabilities by resourceType', () => {
             CONSTANTS.resourceTypes.forEach((resourceType:any) => {
-                const request = calendarEndpoints.getCalendarAvailabilitiesByResourceType(resourceType);
-                request.then((response: any) => {
+                const response = calendarEndpoints.getCalendarAvailabilitiesByResourceType(resourceType);
+                response.then((response: any) => {
                     commonAssertions.assertIsSuccessfullGetArray(response);
                     calendarAssertions.assertGetCalendarAvailabilitiesByResourceType(response);
                 });
-                commonAssertions.assertResponseJsonContentType(request);
+                commonAssertions.assertResponseJsonContentType(response);
             });
         });
     });
 
     context('calendar GET /calendar/settings', () => {
         it('should get all calendar settings', () => {
-            const request = calendarEndpoints.getAllCalendarSettings();
-            request.then((response: any) => {
+            const response = calendarEndpoints.getAllCalendarSettings();
+            response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullGet(response);
                 calendarAssertions.assertgetAllCalendarSettings(response);
             });
-            commonAssertions.assertResponseJsonContentType(request);
+            commonAssertions.assertResponseJsonContentType(response);
         });
     });
 
     context('calendar GET /calendar/view-settings', () => {
         it('should get all calendar view settings', () => {
-            const request = calendarEndpoints.getAllCalendarViewSettings();
-            request.then((response: any) => {
+            const response = calendarEndpoints.getAllCalendarViewSettings();
+            response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullGet(response);
                 calendarAssertions.assertGetAllCalendarViewSettings(response);
             });
-            commonAssertions.assertResponseJsonContentType(request);
+            commonAssertions.assertResponseJsonContentType(response);
         });
     });
 
     context('calendar GET calendar/events/{id}/appointments', () => {
         it('should get all calendar appointments by eventId', () => {
-            const request = calendarEndpoints.getCalendarAppointmentByEventId(eventId);
-            request.then((response: any) => {
+            const response = calendarEndpoints.getCalendarAppointmentByEventId(eventId);
+            response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullGet(response);
                 calendarAssertions.assertGetCalendarAppointmentByEventId(response);
             });
-            commonAssertions.assertResponseJsonContentType(request);
+            commonAssertions.assertResponseJsonContentType(response);
         });
     });
 
     context('calendar GET /calendar/events/{id}/legacyId', () => {
         it('should get the calendar legacyId by eventId', () => {
-            const request = calendarEndpoints.getCalendarLegacyIdByEventId(eventId);
-            request.then((response: any) => {
+            const response = calendarEndpoints.getCalendarLegacyIdByEventId(eventId);
+            response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullGet(response);
                 calendarAssertions.asserrtGetCalendarLegacyIdByEventId(response);
             });
-            commonAssertions.assertResponseJsonContentType(request);
+            commonAssertions.assertResponseJsonContentType(response);
         });
     });
 
     context('calendar GET /calendar/events/appointments/{id}', () => {
         it('should get the calendar appointment by its Id', () => {
-            const request = calendarEndpoints.getCalendarAppointmentById(appointmentId);
-            request.then((response: any) => {
+            const response = calendarEndpoints.getCalendarAppointmentById(appointmentId);
+            response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullGet(response);
                 calendarAssertions.assertGetCalendarAppointmentById(response);
             });
-            commonAssertions.assertResponseJsonContentType(request);
+            commonAssertions.assertResponseJsonContentType(response);
         });
     });
 
     context('calendar GET /calendar/events/appointments/{id}/set', () => {
         it('should get the calendar appointment set by appointmentId', () => {
-            const request = calendarEndpoints.getCalendarAppontmentSetById(appointmentId);
-            request.then((response: any) => {
+            const response = calendarEndpoints.getCalendarAppontmentSetById(appointmentId);
+            response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullGetArray(response);
                 calendarAssertions.assertGetCalendarAppontmentSetById(response);
             });
-            commonAssertions.assertResponseJsonContentType(request);
+            commonAssertions.assertResponseJsonContentType(response);
         });
     });
 
     context('calendar GET /calendar/events/appointments/{id}/future-recurrents', () => {
         it('should get the calendar appointment future recurents by appointmentId', () => {
-            const request = calendarEndpoints.getCalendarAppointmentFutureRecurrentsById(appointmentId);
-            request.then((response: any) => {
+            const response = calendarEndpoints.getCalendarAppointmentFutureRecurrentsById(appointmentId);
+            response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullGetArray(response);
                 calendarAssertions.assertGetCalendarAppointmentFutureRecurrentsById(response);
             });
-            commonAssertions.assertResponseJsonContentType(request);
+            commonAssertions.assertResponseJsonContentType(response);
         });
     });
 
     context('calendar GET /calendar/events/appointments/{patientId}/defaults', () => {
         it('should get the calendar appointment defaults by patientId', () => {
-            const request = calendarEndpoints.getCalendarAppontmentDefaultsByPatientId(patientId);
-            request.then((response: any) => {
+            const response = calendarEndpoints.getCalendarAppontmentDefaultsByPatientId(patientId);
+            response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullGet(response);
                 calendarAssertions.assertGetCalendarAppontmentDefaultsByPatientId(response);
             });
@@ -150,12 +149,12 @@ describe('Calendar GET Endpoints - Sanity Tests', () => {
 
     context('calendar GET /calendar/events/appointments/{id}/legacyId', () => {
         it ('should get the calendar appointment legacyId by appointmentId', () => {
-            const request = calendarEndpoints.getCalendarAppointmentLegacyIdById(appointmentId);
-            request.then((response: any) => {
+            const response = calendarEndpoints.getCalendarAppointmentLegacyIdById(appointmentId);
+            response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullGet(response);
                 calendarAssertions.assertGetCalendarAppointmentLegacyIdById(response);
             });
-            commonAssertions.assertResponseJsonContentType(request);
+            commonAssertions.assertResponseJsonContentType(response);
         });
     });
 });

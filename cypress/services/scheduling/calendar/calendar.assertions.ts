@@ -18,8 +18,10 @@ function assertGetAllCalendarEvents (response: any) {
 /**
  * Assert getting calendar events by ID
  * @param {Object} response - GET /calendar/events/{id} response
+ * @param {Number} eventId - the event Id
  */
-function assertGetCalendarEvent (response: any) {
+function assertGetCalendarEvent (response: any, eventId: Number) {
+    expect(response.body.id).equal(eventId)
     expect(response.body.createdBy).equal(`${CONSTANTS.objectId}`);
 };
 

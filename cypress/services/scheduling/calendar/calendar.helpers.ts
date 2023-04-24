@@ -8,6 +8,7 @@ function getEventId(response: any) {
     response.body.forEach((item: any) => {
         eventIds.push(item.id ? item.id : null);
     });
+    expect(eventIds).to.not.be.undefined.and.to.not.be.empty;
     return eventIds[0];
 };
 
@@ -21,6 +22,7 @@ function getAppointmentId(response: any) {
     response.body.forEach ((item: any) => {
         appointmentIds.push(item.type === 'Appointment' ? item.id : null);
     });
+    expect(appointmentIds).to.not.be.undefined.and.to.not.be.empty;
     return appointmentIds[0];
 };
 
@@ -34,6 +36,7 @@ function getPatientId(response: any) {
     response.body.forEach ((item: any) => {
         patientIds.push(item.properties.Appointment.patientId ? item.properties.Appointment.patientId : null);
     });
+    expect(patientIds).to.not.be.undefined.and.to.not.be.empty;
     return patientIds[0];
 };
 
