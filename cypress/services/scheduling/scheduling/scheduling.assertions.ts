@@ -9,6 +9,54 @@ function assertGetAllSchedulingGroups (response: any) {
 };
 
 /**
+ * Assert posting a scheduling group
+ * @param {Object} response - POST /group response
+ */
+function assertAddGroup (response: any) {
+    //TODO
+};
+
+/**
+ * Assert updating a scheduling group
+ * @param {Object} response - PUT /group/{id} response
+ */
+function assertUpdateGroup (response: any, groupId: Number) {
+    //expect(response.body.id).equal(groupId);
+};
+
+/**
+ * Assert deleting a scheduling group
+ * @param {Object} response - DELETE /group/{id} response
+ */
+function assertDeleteGroup (response: any, groupId: Number) {
+    //TODO
+};
+
+/**
+ * Assert posting a scheduling group override
+ * @param {Object} response - POST /group/override response
+ */
+function assertAddGroupOverride (response: any) {
+    //TODO
+};
+
+/**
+ * Assert updating a scheduling group override
+ * @param {Object} response - PUT /group/override/{id} response
+ */
+function assertUpdateGroupOverride (response: any,groupId: Number) {
+    //TODO
+};
+
+/**
+ * Assert deleting a scheduling group override
+ * @param {Object} response - Delete /group/override/{id} response
+ */
+function assertDeleteGroupOverride (response: any,groupId: Number) {
+    //TODO
+};
+
+/**
  * Assert getting scheduling rules
  * @param {Object} response - GET /schedulingrules response
  */
@@ -60,6 +108,12 @@ function assertGetSchedulingShift(response: any, shiftId: Number) {
 
 export {
     assertGetAllSchedulingGroups,
+    assertAddGroup,
+    assertUpdateGroup,
+    assertDeleteGroup,
+    assertAddGroupOverride,
+    assertUpdateGroupOverride,
+    assertDeleteGroupOverride,
     assertGetAllSchedulingRules,
     assertGetSchedulingRule,
     assertGetAllSchedulingUnavailabilities,

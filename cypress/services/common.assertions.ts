@@ -11,7 +11,7 @@ function assertResponseJsonContentType (response: any) {
  * Assert GET was successfull
  * @param {Object} response 
  */
-function assertIsSuccessfullGet(response: any) {
+function assertIsSuccessfullResponse(response: any) {
     expect(response.status).equal(200);
     //expect(response.body).not.null; /*comment should be removed when we have valid data */
 };
@@ -20,7 +20,7 @@ function assertIsSuccessfullGet(response: any) {
  * Assert GET was successfull and its body is an array
  * @param {Object} response 
  */
-function assertIsSuccessfullGetArray(response: any) {
+function assertIsSuccessfullResponseArray(response: any) {
     expect(response.status).equal(200);
     //expect(response.body).not.null; /*comment should be removed when we have valid data */
     expect(response.body).to.be.a('array');
@@ -28,6 +28,6 @@ function assertIsSuccessfullGetArray(response: any) {
 
 export {
     assertResponseJsonContentType,
-    assertIsSuccessfullGet,
-    assertIsSuccessfullGetArray
+    assertIsSuccessfullResponse,
+    assertIsSuccessfullResponseArray
 };

@@ -1,6 +1,7 @@
 import {BASEPATHS} from "../../../helper";
 import {API} from "../../../helper";
 import {CONSTANTS} from "../../../helper";
+import * as groupFixtures from './../../../tests/scheduling/scheduling/fixtures/groups.fixtures'
 
 let requestQueryString = {'StartDate': CONSTANTS.startDate,'EndDate': CONSTANTS.endDate};
 
@@ -15,6 +16,82 @@ function getAllSchedulingGroups(): Cypress.ObjectLike {
        method: 'GET',
        url: `${API}${BASEPATHS.schedulingBasePath}/groups`,
        headers: requestHeaders
+    });
+};
+
+/**
+ * send request to POST /group
+ * @returns {Object} response
+ */
+function addGroup(): Cypress.ObjectLike {
+    return cy.request({
+        method: 'POST',
+        url: `${API}${BASEPATHS.schedulingBasePath}/group`,
+        headers: requestHeaders,
+        body: groupFixtures.validGroupPayload
+    });
+};
+
+/**
+ * send request to PUT /group/{id}
+ * @returns {Object} response
+ */
+function updateGroup(groupId: Number): Cypress.ObjectLike {
+    return cy.request({
+        method: 'PUT',
+        url: `${API}${BASEPATHS.schedulingBasePath}/group/${groupId}`,
+        headers: requestHeaders,
+        body: groupFixtures.validGroupPayload
+    });
+};
+
+/**
+ * send request to DELETE /group/{id}
+ * @returns {Object} response
+ */
+function deleteGroup(groupId: Number): Cypress.ObjectLike {
+    return cy.request({
+        method: 'DELETE',
+        url: `${API}${BASEPATHS.schedulingBasePath}/group/${groupId}`,
+        headers: requestHeaders
+    });
+};
+
+/**
+ * send request to POST /group/override
+ * @returns {Object} response
+ */
+function addGroupOverride(): Cypress.ObjectLike {
+    return cy.request({
+        method: 'POST',
+        url: `${API}${BASEPATHS.schedulingBasePath}/group/override`,
+        headers: requestHeaders,
+        body: groupFixtures.overrideGroupPayload
+    });
+};
+
+/**
+ * send request to PUT /group/override/{id}
+ * @returns {Object} response
+ */
+function updateGroupOverride(groupId: Number): Cypress.ObjectLike {
+    return cy.request({
+        method: 'PUT',
+        url: `${API}${BASEPATHS.schedulingBasePath}/group/override/${groupId}`,
+        headers: requestHeaders,
+        body: groupFixtures.updateOverrideGroupPayload
+    });
+};
+
+/**
+ * send request to DELETE /group/{id}
+ * @returns {Object} response
+ */
+function deleteGroupOverride(groupId: Number): Cypress.ObjectLike {
+    return cy.request({
+        method: 'DELETE',
+        url: `${API}${BASEPATHS.schedulingBasePath}/group/override/${groupId}`,
+        headers: requestHeaders
     });
 };
 
@@ -95,6 +172,12 @@ function getScedulingShift(shiftId: Number): Cypress.ObjectLike {
 
 export{
     getAllSchedulingGroups,
+    addGroup,
+    updateGroup,
+    deleteGroup,
+    addGroupOverride,
+    updateGroupOverride,
+    deleteGroupOverride,
     getAllSchedulingRules,
     getSchedulingRule,
     getAllSchedulingUnavailabilities,

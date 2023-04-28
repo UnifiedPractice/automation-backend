@@ -12,6 +12,15 @@ function getRuleId(response: any) {
     return ruleIds[0];
 };
 
+
+function getGroupId (response: any) {
+    let groupId: number;
+    groupId = response.body.data;
+    expect(groupId).to.not.be.undefined;
+    return groupId;
+};
+
 export {
-    getRuleId
+    getRuleId,
+    getGroupId
 }
