@@ -22,10 +22,10 @@ function getAllCalendarEvents(): Cypress.ObjectLike {
 
 /**
  * send request to GET /calendar/events/{id}
- * @param {Number} eventId
+ * @param {number} eventId
  * @returns {Object} response
  */
-function getCalendarEvent(eventId: Number): Cypress.ObjectLike {
+function getCalendarEvent(eventId: number): Cypress.ObjectLike {
     return cy.request({
         method: 'GET',
         url: `${API}${BASEPATHS.schedulingBasePath}/calendar/events/${eventId}`,
@@ -86,10 +86,10 @@ function getAllCalendarViewSettings(): Cypress.ObjectLike {
 
 /**
  * send request to GET calendar/events/{id}/appointments
- * @param {Number} eventId 
+ * @param {number} eventId 
  * @returns {Object} response
  */
-function getCalendarAppointmentByEventId(eventId: Number): Cypress.ObjectLike {
+function getCalendarAppointmentByEventId(eventId: number): Cypress.ObjectLike {
     return cy.request({
         method: 'GET',
         url: `${API}${BASEPATHS.schedulingBasePath}/calendar/events/${eventId}/appointments`,
@@ -99,10 +99,10 @@ function getCalendarAppointmentByEventId(eventId: Number): Cypress.ObjectLike {
 
 /**
  * send request to GET /calendar/events/{id}/legacyId
- * @param {Number} eventId 
+ * @param {number} eventId 
  * @returns {Object} response
  */
-function getCalendarLegacyIdByEventId(eventId: Number): Cypress.ObjectLike {
+function getCalendarLegacyIdByEventId(eventId: number): Cypress.ObjectLike {
     return cy.request({
         method: 'GET',
         url: `${API}${BASEPATHS.schedulingBasePath}/calendar/events/${eventId}/legacyId`,
@@ -112,10 +112,10 @@ function getCalendarLegacyIdByEventId(eventId: Number): Cypress.ObjectLike {
 
 /**
  * send request to GET /calendar/events/appointments/{id}
- * @param {Number} appointmentId 
+ * @param {number} appointmentId 
  * @returns {Object} response
  */
-function getCalendarAppointmentById(appointmentId: Number): Cypress.ObjectLike {
+function getCalendarAppointmentById(appointmentId: number): Cypress.ObjectLike {
     return cy.request({
         method: 'GET',
         url: `${API}${BASEPATHS.schedulingBasePath}/calendar/events/appointments/${appointmentId}`,
@@ -125,10 +125,10 @@ function getCalendarAppointmentById(appointmentId: Number): Cypress.ObjectLike {
 
 /**
  * send request to GET /calendar/events/appointments/{id}/set
- * @param {Number} appointmentId 
+ * @param {number} appointmentId 
  * @returns {Object} response
  */
-function getCalendarAppontmentSetById(appointmentId: Number): Cypress.ObjectLike {
+function getCalendarAppontmentSetById(appointmentId: number): Cypress.ObjectLike {
     return cy.request({
         method: 'GET',
         url: `${API}${BASEPATHS.schedulingBasePath}/calendar/events/appointments/${appointmentId}/set`,
@@ -138,10 +138,10 @@ function getCalendarAppontmentSetById(appointmentId: Number): Cypress.ObjectLike
 
 /**
  * send request to GET /calendar/events/appointments/{id}/future-recurrents
- * @param {Number} appointmentId 
+ * @param {number} appointmentId 
  * @returns {Object} response
  */
-function getCalendarAppointmentFutureRecurrentsById(appointmentId: Number): Cypress.ObjectLike {
+function getCalendarAppointmentFutureRecurrentsById(appointmentId: number): Cypress.ObjectLike {
     return cy.request({
         method: 'GET',
         url: `${API}${BASEPATHS.schedulingBasePath}/calendar/events/appointments/${appointmentId}/future-recurrents`,
@@ -151,10 +151,10 @@ function getCalendarAppointmentFutureRecurrentsById(appointmentId: Number): Cypr
 
 /**
  * send request to GET /calendar/events/appointments/{patientId}/defaults
- * @param {Number} patientId 
+ * @param {number} patientId 
  * @returns {Object} response
  */
-function getCalendarAppontmentDefaultsByPatientId(patientId: Number): Cypress.ObjectLike {
+function getCalendarAppontmentDefaultsByPatientId(patientId: number): Cypress.ObjectLike {
     return cy.request({
         method: 'GET',
         url: `${API}${BASEPATHS.schedulingBasePath}/calendar/events/appointments/${patientId}/defaults`,
@@ -164,10 +164,10 @@ function getCalendarAppontmentDefaultsByPatientId(patientId: Number): Cypress.Ob
 
 /**
  * send request to GET /calendar/events/appointments/{id}/legacyId
- * @param {Number} appointmentId 
+ * @param {number} appointmentId 
  * @returns {Object} response
  */
-function getCalendarAppointmentLegacyIdById(appointmentId: Number): Cypress.ObjectLike {
+function getCalendarAppointmentLegacyIdById(appointmentId: number): Cypress.ObjectLike {
     return cy.request({
         method: 'GET',
         url: `${API}${BASEPATHS.schedulingBasePath}/calendar/events/appointments/${appointmentId}/legacyId`,

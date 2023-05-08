@@ -3,7 +3,7 @@ import {CONSTANTS} from "../../../helper";
 /**
  * Assert getting calendar events
  * @param {Object} response - GET /calendar/events response
- * @param {Number} index - index for each event
+ * @param {number} index - index for each event
  */
 function assertGetAllCalendarEvents (response: any) {
     response.body.forEach((item: any, index:number) => {
@@ -18,11 +18,11 @@ function assertGetAllCalendarEvents (response: any) {
 /**
  * Assert getting calendar events by ID
  * @param {Object} response - GET /calendar/events/{id} response
- * @param {Number} eventId - the event Id
+ * @param {number} eventId - the event Id
  */
-function assertGetCalendarEvent (response: any, eventId: Number) {
-    expect(response.body.id).equal(eventId)
-    expect(response.body.createdBy).equal(`${CONSTANTS.objectId}`);
+function assertGetCalendarEvent (response: any, eventId: number) {
+    expect(response.body.id).equals(eventId)
+    expect(response.body.createdBy).equals(`${CONSTANTS.objectId}`);
 };
 
 /**

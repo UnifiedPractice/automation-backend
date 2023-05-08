@@ -5,9 +5,9 @@ import * as commonAssertions from './../../../services/common.assertions'
 import { CONSTANTS } from '../../../helper'
 
 describe('Calendar GET Endpoints - Sanity Tests', () => {
-    let eventId: Number
-    let appointmentId: Number
-    let patientId: Number
+    let eventId: number
+    let appointmentId: number
+    let patientId: number
 
     context('calendar GET /calendar/events',  () => {
         it('should get all calendar events',  () => {

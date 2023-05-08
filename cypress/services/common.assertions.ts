@@ -12,7 +12,7 @@ function assertResponseJsonContentType (response: any) {
  * @param {Object} response 
  */
 function assertIsSuccessfullResponse(response: any) {
-    expect(response.status).equal(200);
+    expect(response.status).equals(200);
     //expect(response.body).not.null; /*comment should be removed when we have valid data */
 };
 
@@ -21,7 +21,7 @@ function assertIsSuccessfullResponse(response: any) {
  * @param {Object} response 
  */
 function assertIsSuccessfullResponseArray(response: any) {
-    expect(response.status).equal(200);
+    expect(response.status).equals(200);
     //expect(response.body).not.null; /*comment should be removed when we have valid data */
     expect(response.body).to.be.a('array');
 };

@@ -4,7 +4,7 @@
  * @returns first ruleId from the response
  */
 function getRuleId(response: any) {
-    let ruleIds: Number[] = [];
+    let ruleIds: number[] = [];
     response.body.forEach((item: any) => {
         ruleIds.push(item.id ? item.id : null);
     });
@@ -13,7 +13,7 @@ function getRuleId(response: any) {
 };
 
 
-function getGroupId (response: any) {
+function getData (response: any) {
     let groupId: number;
     groupId = response.body.data;
     expect(groupId).to.not.be.undefined;
@@ -22,5 +22,5 @@ function getGroupId (response: any) {
 
 export {
     getRuleId,
-    getGroupId
+    getData
 }

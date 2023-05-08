@@ -4,7 +4,7 @@
  * @returns first eventId from the response
  */
 function getEventId(response: any) {
-    let eventIds: Number[] = [];
+    let eventIds: number[] = [];
     response.body.forEach((item: any) => {
         eventIds.push(item.id ? item.id : null);
     });
@@ -18,7 +18,7 @@ function getEventId(response: any) {
  * @returns first appointmentId from the response
  */
 function getAppointmentId(response: any) {
-    let appointmentIds: Number[] = [];
+    let appointmentIds: number[] = [];
     response.body.forEach ((item: any) => {
         appointmentIds.push(item.type === 'Appointment' ? item.id : null);
     });
@@ -32,7 +32,7 @@ function getAppointmentId(response: any) {
  * @returns first patientId from the response
  */
 function getPatientId(response: any) {
-    let patientIds: Number[] = [];
+    let patientIds: number[] = [];
     response.body.forEach ((item: any) => {
         patientIds.push(item.properties.Appointment.patientId ? item.properties.Appointment.patientId : null);
     });
