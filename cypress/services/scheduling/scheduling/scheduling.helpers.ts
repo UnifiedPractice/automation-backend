@@ -1,7 +1,7 @@
 /**
  * 
  * @param {Object} response 
- * @returns first ruleId from the response
+ * @returns ruleIds[0] - first ruleId from the response
  */
 function getRuleId(response: any) {
     let ruleIds: number[] = [];
@@ -12,7 +12,11 @@ function getRuleId(response: any) {
     return ruleIds[0];
 };
 
-
+/**
+ * 
+ * @param {Object} response 
+ * @returns groupId
+ */
 function getData (response: any) {
     let groupId: number;
     groupId = response.body.data;

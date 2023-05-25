@@ -1,3 +1,5 @@
+import * as settingsFixtures from './../../../tests/scheduling/calendar/fixtures/settings.fixtures'
+
 /**
  * 
  * @param {Object} response 
@@ -11,6 +13,46 @@ function getEventId(response: any) {
     expect(eventIds).to.not.be.undefined.and.to.not.be.empty;
     return eventIds[0];
 };
+
+/**
+ * 
+ * @param {Object} response 
+ * @returns resourceColorSettings
+ */
+function getResourceSettings(response: any) {
+    let resourceSettings: any;
+    resourceSettings = response.body.clinicSetting.resourceColorSettings;
+    resourceSettings.forEach((setting: any) => {
+        setting.eventResourceType = setting.resourceType;
+        delete setting.resourceType;
+    });
+    expect(resourceSettings).to.not.be.undefined;
+    return resourceSettings;
+}
+
+/**
+ * 
+ * @param {Object} response 
+ * @returns otherColors
+ */
+function getOtherColors(response: any) {
+    let otherColors: settingsFixtures.otherColorsInterface;
+    otherColors = response.body.clinicSetting.otherColors;
+    expect(otherColors).to.not.be.undefined;
+    return otherColors;
+}
+
+/**
+ * 
+ * @param {Object} response 
+ * @returns calendarViewSettingsPayload
+ */
+function getCalendarViewSettingsPayload(response: any) {
+    let calendarViewSettingsPayload: any;
+    calendarViewSettingsPayload = response.body
+    expect(calendarViewSettingsPayload).to.not.be.undefined;
+    return calendarViewSettingsPayload
+}
 
 /**
  * 
@@ -40,8 +82,24 @@ function getPatientId(response: any) {
     return patientIds[0];
 };
 
+/**
+ * 
+ * @param {Object} response 
+ * @returns dataId
+ */
+function getDataId (response: any) {
+    let dataId: number;
+    dataId = response.body.data;
+    expect(dataId).to.not.be.undefined;
+    return dataId;
+};
+
 export {
     getEventId,
+    getResourceSettings,
+    getOtherColors,
+    getCalendarViewSettingsPayload,
     getAppointmentId,
-    getPatientId
+    getPatientId,
+    getDataId
 }

@@ -19,7 +19,7 @@ const updateGroupPayload = {
     id: 0,
     ...validGroupPayload,
     endDate: CONSTANTS.timestamp
-}
+};
 
 const overrideGroupPayload = {
     groupId: 0,
@@ -29,7 +29,7 @@ const overrideGroupPayload = {
 const updateOverrideGroupPayload = {
     ...overrideGroupPayload,
     endDate: CONSTANTS.timestamp
-}
+};
 
 export {
     validGroupPayload,
