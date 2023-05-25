@@ -261,17 +261,6 @@ describe('Scheduling GET Endpoints - Sanity Tests', () => {
         });
     });
 
-    context ('scheduling DELETE /shift/{id}', () => {
-        it.skip('should delete a scheduling shift', () => {
-            const response = schedulingEndpoints.deleteShift(shiftId);
-            response.then((response: any) => {
-                commonAssertions.assertIsSuccessfullResponse(response);
-                schedulingAssertions.assertDeleteShift(response, shiftId);
-            });
-            commonAssertions.assertResponseJsonContentType(response);
-        });
-    });
-
     context('scheduling POST /shift/makeup', () => {
         it('should create a scheduling shift makeup', () => {
             const response = schedulingEndpoints.addShiftMakeup();
@@ -300,6 +289,17 @@ describe('Scheduling GET Endpoints - Sanity Tests', () => {
             response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullResponse(response);
                 schedulingAssertions.assertDeleteShiftMakeup(response, shiftMakeupId);
+            });
+            commonAssertions.assertResponseJsonContentType(response);
+        });
+    });
+
+    context ('scheduling DELETE /shift/{id}', () => {
+        it('should delete a scheduling shift', () => {
+            const response = schedulingEndpoints.deleteShift(shiftId);
+            response.then((response: any) => {
+                commonAssertions.assertIsSuccessfullResponse(response);
+                schedulingAssertions.assertDeleteShift(response, shiftId);
             });
             commonAssertions.assertResponseJsonContentType(response);
         });
