@@ -3,6 +3,9 @@ const now = new Date();
 const constants = {
     tenantId: 8,
     objectId: 77,
+    cliend: 'ehr',
+    appointmentId: 51258,
+    personId: 95,
     startDate: '2020-07-03',
     endDate: '2020-7-03',
     startTime: '08:00:00',

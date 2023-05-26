@@ -7,7 +7,7 @@ import * as roomsReservationsFixtures from './../../../tests/scheduling/calendar
 import * as appointmentsFixtures from './../../../tests/scheduling/calendar/fixtures/appointments.fixtures'
 import { CONSTANTS } from '../../../helper'
 
-describe('Calendar GET Endpoints - Sanity Tests', () => {
+describe('Calendar Endpoints - Sanity Tests', () => {
     let eventId: number;
     let appointmentId: number;
     let insertedAppointmentId: number;

@@ -7,7 +7,7 @@ import * as schedulingRuleFixtures from './../../../tests/scheduling/scheduling/
 import * as shiftFixtures from './../../../tests/scheduling/scheduling/fixtures/shifts.fixtures'
 import { CONSTANTS } from '../../../helper'
 
-describe('Scheduling GET Endpoints - Sanity Tests', () => {
+describe('Scheduling Endpoints - Sanity Tests', () => {
     let ruleId: number;
     let insertedRuleId: number;
     let groupId: number;
