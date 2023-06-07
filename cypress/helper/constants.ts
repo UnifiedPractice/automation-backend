@@ -5,6 +5,7 @@ const constants = {
     objectId: 77,
     cliend: 'ehr',
     appointmentId: 51258,
+    calendarAppointmentId: 12,
     personId: 95,
     startDate: '2020-07-03',
     endDate: '2020-7-03',
