@@ -1,0 +1,17 @@
+name: Run Cypress tests
+
+on:
+  repository_dispatch:
+    types: [run_cypress_tests]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'main'
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          spec: cypress/tests
