@@ -1,8 +1,7 @@
 name: Run Cypress tests
 
 on:
-  repository_dispatch:
-    types: [run_cypress_tests]
+  workflow_dispatch
 
 jobs:
   tests:
