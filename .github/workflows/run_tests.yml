@@ -1,0 +1,31 @@
+name: Run Cypress tests
+
+on:
+  workflow_dispatch
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'main'
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          spec: cypress/tests
+
+      - name: "Upload Cypress videos"
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore
+
+      - name: "Upload Cypress screenshots"
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore
