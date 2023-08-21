@@ -5,7 +5,7 @@ import * as securityFixtures from './../../tests/security/fixtures/security.fixt
 
 let requestQueryString = {'return_to': '0'}
 
-let requestHeaders: { [key: string]: number | string } = {'TenantId': CONSTANTS.tenantId,'ObjectId': CONSTANTS.objectId, 'Client': CONSTANTS.cliend};
+let requestHeaders: { [key: string]: number | string } = {'TenantId': CONSTANTS.tenantId,'ObjectId': CONSTANTS.objectId, 'Client': CONSTANTS.client};
 
 /**
  * send request to POST /appointments/{id}

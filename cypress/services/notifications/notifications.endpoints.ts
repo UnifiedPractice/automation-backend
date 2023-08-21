@@ -5,7 +5,7 @@ import * as notificationsFixtures from './../../tests/notifications/fixtures/not
 
 let requestQueryString: { [key: string]: number | string } = {'NotificationTypes': 'PractitionerAcceptConfirmation','EntityTypes': CONSTANTS.eventTypes[0]};
 
-let requestHeaders: { [key: string]: number | string } = {'TenantId': CONSTANTS.tenantId,'ObjectId': CONSTANTS.objectId, 'Client': CONSTANTS.cliend};
+let requestHeaders: { [key: string]: number | string } = {'TenantId': CONSTANTS.tenantId,'ObjectId': CONSTANTS.objectId, 'Client': CONSTANTS.client};
 
 /**
  * send request to POST /appointments/{id}

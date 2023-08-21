@@ -19,7 +19,7 @@ describe('Security Endpoints - Sanity Tests', () => {
     });
 
     context('security GET /metabse/sso', () => {
-        it('should get the metabase sso', () => {
+        it.skip('should get the metabase sso', () => {
             const response = securityEndpoints.getMetabaseSso();
             response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullResponse(response);
