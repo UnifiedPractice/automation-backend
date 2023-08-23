@@ -4,7 +4,7 @@ import {CONSTANTS} from './../../helper'
 
 let requestQueryString = {'CalendarAppointmentId': CONSTANTS.calendarAppointmentId}
 
-let requestHeaders: { [key: string]: number | string } = {'TenantId': CONSTANTS.tenantId,'ObjectId': CONSTANTS.objectId, 'Client': CONSTANTS.cliend};
+let requestHeaders: { [key: string]: number | string } = {'TenantId': CONSTANTS.tenantId,'ObjectId': CONSTANTS.objectId, 'Client': CONSTANTS.client};
 
 /**
  * send request to GET /charts

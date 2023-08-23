@@ -23,7 +23,7 @@ function assertIsSuccessfullResponse(response: any) {
 function assertIsSuccessfullResponseArray(response: any) {
     expect(response.status).equals(200);
     //expect(response.body).not.null; /*comment should be removed when we have valid data */
-    expect(response.body).to.be.a('array');
+    expect(response.body).to.be.an('array');
 };
 
 export {
