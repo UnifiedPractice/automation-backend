@@ -8,7 +8,7 @@ const recurrenceRule = {
         'Sunday'
     ],
     interval: 1,
-    endTime: CONSTANTS.timestampPlusOneHour
+    endTime: CONSTANTS.timestampPlusOneDay
 };
 
 const validRoomsReservationsPayload = {
@@ -18,7 +18,7 @@ const validRoomsReservationsPayload = {
     locationId: CONSTANTS.locationId,
     rooms: [1],
     startTime: CONSTANTS.timestamp,
-    endTime: CONSTANTS.timestampPlusOneHour,
+    endTime: CONSTANTS.timestampPlusOneDay,
     isAllDayEvent: false,
     rRule: {...recurrenceRule}
 }

@@ -8,7 +8,7 @@ const recurrenceRule = {
         'Sunday'
     ],
     interval: 1,
-    endTime: CONSTANTS.timestampPlusOneHour
+    endTime: CONSTANTS.timestampPlusOneDay
 };
 
 const validTimeoffsPayload = {
@@ -17,7 +17,7 @@ const validTimeoffsPayload = {
     location: CONSTANTS.locationId,
     practitioners: [CONSTANTS.objectId],
     startTime: CONSTANTS.timestamp,
-    endTime: CONSTANTS.timestampPlusOneHour,
+    endTime: CONSTANTS.timestampPlusOneDay,
     isAllDayEvent: false,
     rRule: {...recurrenceRule}
 }
