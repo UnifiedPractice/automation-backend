@@ -1,5 +1,6 @@
 import * as settingsFixtures from './../../../tests/scheduling/calendar/fixtures/settings.fixtures'
 import {CONSTANTS} from "../../../helper";
+import { resolve } from 'cypress/types/bluebird';
 
 /**
  * Assert getting calendar events
@@ -7,12 +8,36 @@ import {CONSTANTS} from "../../../helper";
  * @param {number} index - index for each event
  */
 function assertGetAllCalendarEvents (response: any) {
-    response.body.forEach((item: any, index:number) => {
-        expect(item.id).exist;
-        expect(item.type).oneOf(CONSTANTS.eventTypes);
-        expect(item.startTime).contain(CONSTANTS.startDate);
-        expect(item.eventResources[index].id).exist;
-        expect(item.eventResources[index].type).exist;
+    response.body.forEach((item: any) => {
+        expect(item).to.have.property('id').and.to.be.a('number');
+        expect(item).to.have.property('type').and.to.be.a('string').oneOf(CONSTANTS.eventTypes);
+        expect(item).to.have.property('startTime').and.to.be.a('string').contain(CONSTANTS.startDate);
+        expect(item).to.have.property('endTime').and.to.be.a('string').contain(CONSTANTS.startDate);
+        expect(item).to.have.property('startUtcTime').and.to.be.a('string').contain(CONSTANTS.startDate);
+        expect(item).to.have.property('endUtcTime').and.to.be.a('string').contain(CONSTANTS.startDate);
+        expect(item).to.have.property('allDay').and.to.be.a('boolean');
+        expect(item).to.have.property('updatedBy').and.to.be.a('string');
+        expect(item).to.have.property('updatedOn').and.to.be.a('string');
+        expect(item).to.have.property('updatedByClient').and.to.be.a('string');
+        expect(item).to.have.property('createdBy').and.to.be.a('string');
+        expect(item).to.have.property('createdOn').and.to.be.a('string');
+        expect(item).to.have.property('createdByClient').and.to.be.a('string');
+        expect(item).to.have.property('isCancelled').and.to.be.a('boolean');
+        expect(item).to.have.property('eventResources').and.to.be.an('array');
+        item.eventResources.forEach((eventResource: any) => {
+            expect(eventResource).to.have.property('id').and.to.be.a('number');
+            expect(eventResource).to.have.property('type').and.to.be.a('string');
+            if(eventResource.role) {
+                expect(eventResource).to.have.property('role').and.to.be.a('string');
+            };
+            if(eventResource.properties) {
+                expect(eventResource).to.have.property('properties').and.to.be.an('Object');
+            };
+        });
+        expect(item).to.have.property('properties').and.to.be.an('Object');
+        if(Object.keys(item.properties).length!=0){
+            expect(Object.keys(item.properties)).to.deep.equal(['Appointment', 'SchedulingRule']);
+        };
     });
 };
 
@@ -22,8 +47,37 @@ function assertGetAllCalendarEvents (response: any) {
  * @param {number} eventId - the event Id
  */
 function assertGetCalendarEvent (response: any, eventId: number) {
-    expect(response.body.id).equals(eventId)
-    expect(response.body.createdBy).equals(`${CONSTANTS.objectId}`);
+    expect(response.body).to.have.property('createdByUser').and.to.be.a('string');
+    expect(response.body).to.have.property('updatedByUser').and.to.be.a('string');
+    expect(response.body).to.have.property('id').and.to.be.a('number').equals(eventId);
+    expect(response.body).to.have.property('type').and.to.be.a('string');
+    expect(response.body).to.have.property('startTime').and.to.be.a('string');
+    expect(response.body).to.have.property('endTime').and.to.be.a('string');
+    expect(response.body).to.have.property('startUtcTime').and.to.be.a('string');
+    expect(response.body).to.have.property('endUtcTime').and.to.be.a('string');
+    expect(response.body).to.have.property('allDay').and.to.be.a('boolean');
+    expect(response.body).to.have.property('updatedBy').and.to.be.a('string');
+    expect(response.body).to.have.property('updatedOn').and.to.be.a('string');
+    expect(response.body).to.have.property('updatedByClient').and.to.be.a('string');
+    expect(response.body).to.have.property('createdBy').and.to.be.a('string').equals(`${CONSTANTS.objectId}`);
+    expect(response.body).to.have.property('createdOn').and.to.be.a('string');
+    expect(response.body).to.have.property('createdByClient').and.to.be.a('string');
+    expect(response.body).to.have.property('isCancelled').and.to.be.a('boolean');
+    expect(response.body).to.have.property('eventResources').and.to.be.an('array');
+    response.body.eventResources.forEach((eventResource: any) => {
+        expect(eventResource).to.have.property('id').and.to.be.a('number');
+        expect(eventResource).to.have.property('type').and.to.be.a('string');
+        if(eventResource.role) {
+            expect(eventResource).to.have.property('role').and.to.be.a('string');
+        };
+        if(eventResource.properties) {
+            expect(eventResource).to.have.property('properties').and.to.be.an('Object');
+        };
+    });
+    expect(response.body).to.have.property('properties').and.to.be.an('Object');
+    if(Object.keys(response.body.properties).length!=0){
+        expect(Object.keys(response.body.properties)).to.deep.equal(['Appointment', 'SchedulingRule']);
+    };
 };
 
 /**
@@ -31,7 +85,26 @@ function assertGetCalendarEvent (response: any, eventId: number) {
  * @param {Object} response  - GET /calendar/availabilities response
  */
 function assertGetAllCalendarAvailabilities (response: any) {
-    //TODO    
+    if (response.body.length!=0) {
+        response.body.forEach((item: any) => {
+            expect(item).to.have.property('startTime').and.to.be.a('string');
+            expect(item).to.have.property('endTime').and.to.be.a('string');
+            expect(item).to.have.property('resource').and.to.be.an('Object');
+            if(Object.keys(item.resource).length!=0) {
+                expect(Object.keys(item.resource)).to.deep.equal(['id', 'type', 'availableFor', 'availableForAllServices', 'availableForAllRooms', 'isSupervising', 'groupId']);
+                item.resource.availableFor.forEach((availableResource: any) => {
+                    expect(availableResource).to.have.property('id').and.to.be.a('number');
+                    expect(availableResource).to.have.property('type').and.to.be.a('string');
+                    if(availableResource.role) {
+                        expect(availableResource).to.have.property('role').and.to.be.a('string');
+                    };
+                    if(availableResource.properties) {
+                        expect(availableResource).to.have.property('properties').and.to.be.an('Object');
+                    };
+                });
+            };
+        });
+    };
 };
 
 /**
@@ -39,8 +112,7 @@ function assertGetAllCalendarAvailabilities (response: any) {
  * @param {Object} response - GET /calendar/availabilities/{resourceType} response
  */
 function assertGetCalendarAvailabilitiesByResourceType (response: any) {
-    //TODO
-    
+    assertGetAllCalendarAvailabilities(response);    
 };
 
 /**
@@ -48,7 +120,21 @@ function assertGetCalendarAvailabilitiesByResourceType (response: any) {
  * @param {Object} response - GET /calendar/settings response
  */
 function assertgetAllCalendarSettings (response: any) {
-    //TODO
+    if (response.body.length!=0) {
+        expect(response.body).to.have.property('clinicSetting').and.to.be.an('Object');
+        if(Object.keys(response.body.clinicSetting).length!=0) {
+            expect(Object.keys(response.body.clinicSetting)).to.deep.equal(['resourceColorSettings', 'otherColors']);
+            response.body.clinicSetting.resourceColorSettings.forEach((item: any)=> {
+                expect(item).to.have.property('resourceType').and.to.be.a('string');
+                expect(item).to.have.property('resourceId').and.to.be.a('number');
+                expect(item).to.have.property('hexColorCode').and.to.be.a('string');
+            });
+        };
+        expect(response.body).to.have.property('userSetting').and.to.be.an('Object');
+        if(Object.keys(response.body.userSetting).length!=0) {
+            expect(Object.keys(response.body.userSetting)).to.deep.equal(['rememberCalendarView']);
+        };
+    };
 };
 
 /**
@@ -56,7 +142,8 @@ function assertgetAllCalendarSettings (response: any) {
  * @param {Object} response - PUT /calendar/settings response
  */
 function assertUpdateCalendarSettings (response: any, settingsId: number) {
-    expect(response.body.data).equals(settingsId);
+    expect(response.body).to.have.property('data').and.to.be.a('number').equals(settingsId);;
+    expect(response.body).to.have.property('messages').and.to.be.an('array');
 };
 
 /**
@@ -64,7 +151,22 @@ function assertUpdateCalendarSettings (response: any, settingsId: number) {
  * @param {Object} response - GET /calendar/view-settings response
  */
 function assertGetAllCalendarViewSettings(response: any) {
-    //TODO
+    if (response.body.length!=0) {
+        expect(response.body).to.have.property('colorCodeBy').and.to.be.a('string');
+        expect(response.body).to.have.property('resourceView').and.to.be.a('number');
+        expect(response.body).to.have.property('calendarView').and.to.be.a('string');
+        expect(response.body).to.have.property('viewScaling').and.to.be.a('number');
+        expect(response.body).to.have.property('showCancelled').and.to.be.a('boolean');
+        expect(response.body).to.have.property('showAppointmentsOnly').and.to.be.a('boolean');
+        expect(response.body).to.have.property('panelHidden').and.to.be.a('boolean');
+        expect(response.body).to.have.property('resourceFilters').and.to.be.an('array');
+        if (response.body.resourceFilters.length!=0) {
+            response.body.resourceFilters.forEach((item: any) => {
+                expect(item).to.have.property('resourceType').and.to.be.a('string');
+                expect(item).to.have.property('resourceId').and.to.be.a('number');
+            });
+        };
+    };
 };
 
 /**
@@ -72,7 +174,8 @@ function assertGetAllCalendarViewSettings(response: any) {
  * @param {Object} response - PUT /calendar/view-settings response
  */
 function assertUpdateCalendarViewSettings (response: any) {
-    expect(response.body.data).equals(0);
+    expect(response.body).to.have.property('data').and.to.be.a('number').equals(0);;
+    expect(response.body).to.have.property('messages').and.to.be.an('array');
 };
 
 /**
@@ -80,7 +183,8 @@ function assertUpdateCalendarViewSettings (response: any) {
  * @param {Object} response - PUT /calendar/user-settings response
  */
 function assertUpdateCalendarUserSettings (response: any) {
-    expect(response.body.data).equals(settingsFixtures.validUserSettingsPayload.id);
+    expect(response.body).to.have.property('data').and.to.be.a('number').equals(settingsFixtures.validUserSettingsPayload.id);
+    expect(response.body).to.have.property('messages').and.to.be.an('array');
 };
 
 /**
@@ -89,8 +193,8 @@ function assertUpdateCalendarUserSettings (response: any) {
  */
 function assertAddCalendarTimeoffs(response: any) {
     expect(response.body.data).to.not.be.undefined;
-    expect(typeof response.body.data).equals('number')
-    expect(response.body.messages).to.be.an('array');
+    expect(response.body).to.have.property('data').and.to.be.a('number');
+    expect(response.body).to.have.property('messages').and.to.be.an('array');
 };
 
 /**
@@ -100,8 +204,8 @@ function assertAddCalendarTimeoffs(response: any) {
 function assertUpdateCalendarTimeoffs(response: any, timeoffId: number) {
     expect(response.body.data).equals(timeoffId);
     expect(response.body.data).to.not.be.undefined;
-    expect(typeof response.body.data).equals('number')
-    expect(response.body.messages).to.be.an('array');
+    expect(response.body).to.have.property('data').and.to.be.a('number');
+    expect(response.body).to.have.property('messages').and.to.be.an('array');
 };
 
 /**
@@ -111,8 +215,8 @@ function assertUpdateCalendarTimeoffs(response: any, timeoffId: number) {
 function assertDeleteCalendarTimeoffs(response: any, timeoffId: number) {
     expect(response.body.data).equals(timeoffId);
     expect(response.body.data).to.not.be.undefined;
-    expect(typeof response.body.data).equals('number')
-    expect(response.body.messages).to.be.an('array');
+    expect(response.body).to.have.property('data').and.to.be.a('number');
+    expect(response.body).to.have.property('messages').and.to.be.an('array');
 };
 
 /**
@@ -143,8 +247,56 @@ function assertDeleteCalendarRoomsReservations(response: any, roomReservationId:
  * Assert getting appointments by eventId
  * @param {Object} response - GET calendar/events/{id}/appointments
  */
-function assertGetCalendarAppointmentByEventId(response: any) {
-    //TODO
+function assertGetCalendarAppointmentByEventId(response: any, eventId: number) {
+    expect(response.body).to.have.property('id').and.to.be.a('number').equals(eventId);
+    expect(response.body).to.have.property('uniqueId').and.to.be.a('string');
+    expect(response.body).to.have.property('eventId').and.to.be.a('number');
+    expect(response.body).to.have.property('legacyId').and.to.be.a('number');
+    expect(response.body).to.have.property('appointmentType').and.to.be.a('string');
+    expect(response.body).to.have.property('appointmentState').and.to.be.a('string');
+    expect(response.body).to.have.property('patientFormsStatus').and.to.be.a('string');
+    expect(response.body).to.have.property('serviceForNewPatient').and.to.be.a('boolean');
+    expect(response.body).to.have.property('patientId').and.to.be.a('number');
+    expect(response.body).to.have.property('sendNotifications').and.to.be.a('boolean');
+    expect(response.body).to.have.property('notificationSettings').and.to.be.an('array');
+    response.body.notificationSettings.forEach((notificationSetting: any) => {
+        expect(notificationSetting).to.have.property('type').and.to.be.a('string');
+        expect(notificationSetting).to.have.property('sms').and.to.be.a('boolean');
+        expect(notificationSetting).to.have.property('email').and.to.be.a('boolean');
+    });
+    expect(response.body).to.have.property('rescheduled').and.to.be.a('boolean');
+    expect(response.body).to.have.property('cancellationFeeCollected').and.to.be.a('boolean');
+    expect(response.body).to.have.property('receiveEmail').and.to.be.a('boolean');
+    expect(response.body).to.have.property('receiveSms').and.to.be.a('boolean');
+    expect(response.body).to.have.property('amountCharged').and.to.be.a('number');
+    expect(response.body).to.have.property('amountCollected').and.to.be.a('number');
+    expect(response.body).to.have.property('createdByUser').and.to.be.a('string');
+    expect(response.body).to.have.property('updatedByUser').and.to.be.a('string');
+    expect(response.body).to.have.property('type').and.to.be.a('string');
+    expect(response.body).to.have.property('startTime').and.to.be.a('string');
+    expect(response.body).to.have.property('endTime').and.to.be.a('string');
+    expect(response.body).to.have.property('startUtcTime').and.to.be.a('string');
+    expect(response.body).to.have.property('endUtcTime').and.to.be.a('string');
+    expect(response.body).to.have.property('allDay').and.to.be.a('boolean');
+    expect(response.body).to.have.property('updatedBy').and.to.be.a('string');
+    expect(response.body).to.have.property('updatedOn').and.to.be.a('string');
+    expect(response.body).to.have.property('updatedByClient').and.to.be.a('string');
+    expect(response.body).to.have.property('createdBy').and.to.be.a('string');
+    expect(response.body).to.have.property('createdOn').and.to.be.a('string');
+    expect(response.body).to.have.property('createdByClient').and.to.be.a('string');
+    expect(response.body).to.have.property('isCancelled').and.to.be.a('boolean');
+    expect(response.body).to.have.property('eventResources').and.to.be.an('array');
+    response.body.eventResources.forEach((eventResource: any) => {
+        expect(eventResource).to.have.property('id').and.to.be.a('number');
+        expect(eventResource).to.have.property('type').and.to.be.a('string');
+        if(eventResource.role) {
+            expect(eventResource).to.have.property('role').and.to.be.a('string');
+        };
+        if(eventResource.properties) {
+            expect(eventResource).to.have.property('properties').and.to.be.an('Object');
+        };
+    });
+    expect(response.body).to.have.property('properties').and.to.be.an('Object');
 };
 
 /**
@@ -152,7 +304,7 @@ function assertGetCalendarAppointmentByEventId(response: any) {
  * @param {Object} response - GET /calendar/events/{id}/legacyId
  */
 function asserrtGetCalendarLegacyIdByEventId(response: any) {
-    //TODO
+    expect(response.body).to.be.a('number');
 };
 
 /**
@@ -161,8 +313,8 @@ function asserrtGetCalendarLegacyIdByEventId(response: any) {
  */
 function assertAddCalendarAppointments(response: any) {
     expect(response.body.data).to.not.be.undefined;
-    expect(typeof response.body.data).equals('number')
-    expect(response.body.messages).to.be.an('array');
+    expect(response.body).to.have.property('data').and.to.be.a('number');
+    expect(response.body).to.have.property('messages').and.to.be.an('array');
 };
 
 /**
@@ -182,32 +334,36 @@ function assertErrorOnUpdateCalendarAppointments (response: any) {
 function assertDeleteCalendarAppointmens(response: any, appointmentId: number) {
     expect(response.body.data).equals(appointmentId);
     expect(response.body.data).to.not.be.undefined;
-    expect(typeof response.body.data).equals('number')
-    expect(response.body.messages).to.be.an('array');
+    expect(response.body).to.have.property('data').and.to.be.a('number');
+    expect(response.body).to.have.property('messages').and.to.be.an('array');
 }
 
 /**
  * Assert getting appointment by appointmentId
  * @param {Object} response - GET/calendar/events/appointments/{id}
  */
-function assertGetCalendarAppointmentById(response: any) {
-    //TODO
+function assertGetCalendarAppointmentById(response: any, eventId: number) {
+    assertGetCalendarAppointmentByEventId(response, eventId);
 };
 
 /**
  * Assert getting appointment set by appointmentId
  * @param {Object} response - GET /calendar/events/appointments/{id}/set
  */
-function assertGetCalendarAppontmentSetById(response: any) {
-    //TODO
+function assertGetCalendarAppontmentSetById(response: any, eventId: number) {
+    if (response.body.length!=0) {
+        assertGetCalendarAppointmentByEventId(response, eventId);
+    };
 };
 
 /**
  * Assert getting appointment future-recurrents by appointmentId
  * @param {Object} response GET /calendar/events/appointments/{id}/future-recurrents
  */
-function assertGetCalendarAppointmentFutureRecurrentsById(response: any) {
-    //TODO
+function assertGetCalendarAppointmentFutureRecurrentsById(response: any, eventId: number) {
+    if (response.body.length!=0) {
+        assertGetCalendarAppointmentByEventId(response, eventId);
+    };
 };
 
 /**
@@ -215,8 +371,8 @@ function assertGetCalendarAppointmentFutureRecurrentsById(response: any) {
  * @param {Object} response POST /calendar/events/appointments/first-visits
  */
 function assertAddAppointmentsFirstVisits(response: any) {
-    expect(response.body.data).exist;
-    expect(response.body.messages).exist
+    expect(response.body).to.have.property('data').and.to.be.an('array');
+    expect(response.body).to.have.property('messages').and.to.be.an('array');
 }
 
 /**
@@ -224,8 +380,8 @@ function assertAddAppointmentsFirstVisits(response: any) {
  * @param {Object} response POST /calendar/events/appointments/scheduling-conflicts
  */
 function assertAddAppointmentsSchedulingConflicts(response: any) {
-    expect(response.body.data).exist;
-    expect(response.body.messages).exist
+    expect(response.body).to.have.property('data').and.to.be.an('array');
+    expect(response.body).to.have.property('messages').and.to.be.an('array');
 }
 
 /**
@@ -233,7 +389,15 @@ function assertAddAppointmentsSchedulingConflicts(response: any) {
  * @param {Object} response - GET /calendar/events/appointments/{patientId}/defaults
  */
 function assertGetCalendarAppontmentDefaultsByPatientId(response: any) {
-    //TODO
+    expect(response.body).to.have.property('serviceId').and.to.be.a('number');
+    expect(response.body).to.have.property('appointmentType').and.to.be.a('string');
+    expect(response.body).to.have.property('notificationSettings').and.to.be.an('array');
+    response.body.notificationSettings.forEach((item: any) => {
+        expect(item).to.have.property('type').and.to.be.a('string');
+        expect(item).to.have.property('sms').and.to.be.a('boolean');
+        expect(item).to.have.property('email').and.to.be.a('boolean');
+    });
+    expect(response.body).to.have.property('sendNotifications').and.to.be.a('boolean');
 };
 
 /**
@@ -251,7 +415,7 @@ function assertErrorOnRejectCalendarAppointments (response: any) {
  * @param {Object} response - GET /calendar/events/appointments/{id}/legacyId
  */
 function assertGetCalendarAppointmentLegacyIdById(response: any) {
-    //TODO
+    expect(response.body).to.be.a('number');
 };
 
 export {

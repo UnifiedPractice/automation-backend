@@ -59,7 +59,7 @@ describe('Scheduling Endpoints - Sanity Tests', () => {
             const response = schedulingEndpoints.deleteGroup(groupId);
             response.then((response: any) => () => {
                 commonAssertions.assertIsSuccessfullResponse(response);
-                schedulingAssertions.assertDeleteGroup(response, groupId);
+                schedulingAssertions.assertDeleteGroup(response);
             });
         });
     });
