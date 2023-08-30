@@ -8,6 +8,14 @@ function assertResponseJsonContentType (response: any) {
 };
 
 /**
+ * Assert response content type is JPEG
+ * @param {Object} response 
+ */
+function assertResponseImageContentType (response: any) {
+    response.its('headers').its('content-type').should('include', 'image/jpeg');
+};
+
+/**
  * Assert GET was successfull
  * @param {Object} response 
  */
@@ -28,6 +36,7 @@ function assertIsSuccessfullResponseArray(response: any) {
 
 export {
     assertResponseJsonContentType,
+    assertResponseImageContentType,
     assertIsSuccessfullResponse,
     assertIsSuccessfullResponseArray
 };

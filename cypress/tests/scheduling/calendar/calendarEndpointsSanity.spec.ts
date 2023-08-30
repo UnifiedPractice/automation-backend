@@ -102,7 +102,7 @@ describe('Calendar Endpoints - Sanity Tests', () => {
         });
     });
 
-    context ('calendar PUT /calendar/view-settings', () => {
+    context('calendar PUT /calendar/view-settings', () => {
         it('should update the calendar view settings', () => {
             const response = calendarEndpoints.updateCalendarViewSettings(validViewSettingsPayload);
             response.then((response: any) => {
@@ -197,7 +197,7 @@ describe('Calendar Endpoints - Sanity Tests', () => {
             const response = calendarEndpoints.getCalendarAppointmentByEventId(eventId);
             response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullResponse(response);
-                calendarAssertions.assertGetCalendarAppointmentByEventId(response);
+                calendarAssertions.assertGetCalendarAppointmentByEventId(response, eventId);
             });
             commonAssertions.assertResponseJsonContentType(response);
         });
@@ -232,7 +232,7 @@ describe('Calendar Endpoints - Sanity Tests', () => {
             const response = calendarEndpoints.getCalendarAppointmentById(appointmentId);
             response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullResponse(response);
-                calendarAssertions.assertGetCalendarAppointmentById(response);
+                calendarAssertions.assertGetCalendarAppointmentById(response, appointmentId);
             });
             commonAssertions.assertResponseJsonContentType(response);
         });
@@ -269,7 +269,7 @@ describe('Calendar Endpoints - Sanity Tests', () => {
             const response = calendarEndpoints.getCalendarAppontmentSetById(appointmentId);
             response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullResponseArray(response);
-                calendarAssertions.assertGetCalendarAppontmentSetById(response);
+                calendarAssertions.assertGetCalendarAppontmentSetById(response, appointmentId);
             });
             commonAssertions.assertResponseJsonContentType(response);
         });
@@ -280,7 +280,7 @@ describe('Calendar Endpoints - Sanity Tests', () => {
             const response = calendarEndpoints.getCalendarAppointmentFutureRecurrentsById(appointmentId);
             response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullResponseArray(response);
-                calendarAssertions.assertGetCalendarAppointmentFutureRecurrentsById(response);
+                calendarAssertions.assertGetCalendarAppointmentFutureRecurrentsById(response, appointmentId);
             });
             commonAssertions.assertResponseJsonContentType(response);
         });

@@ -1,5 +1,11 @@
 const now = new Date();
 
+let nextHour = now.getHours() + 1;
+let nextDay = now.getDate();
+if (nextHour >= 24) {
+  nextHour -= 24;
+  nextDay += 1;
+}
 const constants = {
     tenantId: 8,
     objectId: 77,
@@ -27,8 +33,8 @@ const constants = {
     eventTypes: ["Appointment","TimeOff","ReservedRoom","PublicHoliday","SchedulingRule"],
     resourceTypes: ["Location","Room","Service","Practitioner","Patient"],
     countryCode: 'US',
-    timestamp: `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`,
-    timestampPlusOneHour: `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()} ${now.getHours()+1}:${now.getMinutes()}:${now.getSeconds()}`
+    timestamp: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`,
+    timestampPlusOneHour: `${now.getFullYear()}-${now.getMonth() + 1}-${nextDay} ${nextHour}:${now.getMinutes()}:${now.getSeconds()}`
 }
 
 

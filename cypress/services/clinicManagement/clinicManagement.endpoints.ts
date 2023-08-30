@@ -12,7 +12,7 @@ let patientId: { [key: string]: number | string } = {'PatientId': CONSTANTS.pati
 let dateTime: { [key: string]: number | string } = {'dateTime': CONSTANTS.timestamp}
 let patientsQs: { [key: string]: number | string } = {'FirstName': 'John', 'Page': 1, 'Count': 10};
 let trainingVideosQs: { [key: string]: number | string } = {'Page': 1, 'Count': 10};
-let streamAvatarQs: { [key: string]: number | string } = {'token': '1vBTwNb2%252bOrQi24FUmEk5CJfiqdteK0h6s1ItseWf7hQhaZ9N5oyNGgvP8r30PYTKrd0awo9fpYycuG81GJaTBE70YBHaHptONu3LAeR7nTfBwxiRGS3chqwaUNNHjtAgIHHNHGu0LmDxQlk%252fkGsfv4Mgcus38NgyMGcdixmWv4bFDVfLOuah8HfVwECvmOEUsAvas3p%252f2SGbaq%252fHPzOHQ%253d%253d'}
+let streamAvatarQs: { [key: string]: number | string } = {'token': '1vBTwNb2%2bOrQi24FUmEk5CJfiqdteK0h6s1ItseWf7hQhaZ9N5oyNGgvP8r30PYTKrd0awo9fpYycuG81GJaTBE70YBHaHptONu3LAeR7nTfBwxiRGS3chqwaUNNHjtAgIHHNHGu0LmDxQlk%2fkGsfv4Mgcus38NgyMGcdixmWv4bFDVfLOuah8HfVwECvmOEUsAvas3p%2f2SGbaq%2fHPzOHQ%3d%3d'}
 
 let requestHeaders: { [key: string]: number | string } = {'TenantId': CONSTANTS.tenantId,'ObjectId': CONSTANTS.objectId, 'Client': CONSTANTS.client};
 let streamRequestHeaders: { [key: string]: number | string } = {'TenantId': CONSTANTS.streamTenantId,'ObjectId': CONSTANTS.streamObjectId, 'Client': CONSTANTS.client};

@@ -2,7 +2,6 @@ import * as commonAssertions from './../../services/common.assertions'
 import * as clinicManagementEndpoints from './../../services/clinicManagement/clinicManagement.endpoints'
 import * as clinicManagementAssertions from './../../services/clinicManagement/clinicManagement.assertions'
 import { CONSTANTS } from '../../helper'
-import { resolve } from 'cypress/types/bluebird';
 
 
 describe('Clinic Management Endpoints - Sanity Tests', () => {
@@ -387,13 +386,13 @@ describe('Clinic Management Endpoints - Sanity Tests', () => {
             commonAssertions.assertResponseJsonContentType(response);
         });
 
-        it.skip('should GET /stream/avatar', () => {
+        it('should GET /stream/avatar', () => {
             const response = clinicManagementEndpoints.getStreamAvatar();
             response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullResponse(response);
                 clinicManagementAssertions.assertGetStreamAvatar(response);
             });
-            commonAssertions.assertResponseJsonContentType(response);
+            commonAssertions.assertResponseImageContentType(response);
         });
 
         it('should POST /anonymous/stream/channel', () => {
