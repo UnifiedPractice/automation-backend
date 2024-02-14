@@ -214,7 +214,7 @@ function getOrganization(): Cypress.ObjectLike {
 function getOrganizationInfo(): Cypress.ObjectLike {
     return cy.request({
         method: 'GET',
-        url: `${API}${BASEPATHS.clinicBasePath}/organization/organizationinfo`,
+        url: `${API}${BASEPATHS.clinicBasePath}/organization/business-info`,
         headers: requestHeaders
     });
 };
@@ -224,10 +224,10 @@ function getOrganizationInfo(): Cypress.ObjectLike {
  * @param {Object} organizationInfoBody - the request body
  * @returns {Object} response
  */
-function addOrganizationInfo(organizationInfoBody: any): Cypress.ObjectLike{
+function patchOrganizationInfo(organizationInfoBody: any): Cypress.ObjectLike{
     return cy.request({
-        method: 'POST',
-        url: `${API}${BASEPATHS.clinicBasePath}/organization/organizationinfo`,
+        method: 'PATCH',
+        url: `${API}${BASEPATHS.clinicBasePath}/organization/business-info`,
         headers: requestHeaders,
         body: organizationInfoBody
     });
@@ -615,7 +615,7 @@ export {
     getOnboardingFormsStatusByPatientId,
     getOrganization,
     getOrganizationInfo,
-    addOrganizationInfo,
+    patchOrganizationInfo,
     getAnonymousOrganizationByClinicUid,
     getPatientPortalInviteCount,
     updatePatientPortalDomainName,

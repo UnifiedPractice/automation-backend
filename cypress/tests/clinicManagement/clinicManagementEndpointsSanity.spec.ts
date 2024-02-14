@@ -167,7 +167,7 @@ describe('Clinic Management Endpoints - Sanity Tests', () => {
             commonAssertions.assertResponseJsonContentType(response);
         });
         
-        it('should GET /organization/organizationinfo', () => {
+        it('should GET /organization/business-info', () => {
             const response = clinicManagementEndpoints.getOrganizationInfo();
             response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullResponse(response);
@@ -177,11 +177,11 @@ describe('Clinic Management Endpoints - Sanity Tests', () => {
             commonAssertions.assertResponseJsonContentType(response);
         });
 
-        it('should POST /organization/organizationinfo', () => {
-            const response = clinicManagementEndpoints.addOrganizationInfo(organizationInfoBody);
+        it('should PATCH /organization/business-info', () => {
+            const response = clinicManagementEndpoints.patchOrganizationInfo(organizationInfoBody);
             response.then((response: any) => {
                 commonAssertions.assertIsSuccessfullResponse(response);
-                clinicManagementAssertions.assertAddOrganizationInfo(response);
+                clinicManagementAssertions.assertPatchOrganizationInfo(response);
             });
             commonAssertions.assertResponseJsonContentType(response);
         });

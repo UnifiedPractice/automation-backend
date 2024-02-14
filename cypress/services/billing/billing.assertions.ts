@@ -38,15 +38,26 @@ function assertGetFullsteamSso(response: any) {
 
 /**
  * 
+ * @param {Object} response - GET /fullsteam/sso for clinics without the Fullsteam module
+ */
+function assertErrorOnGetFullsteamSSo (response: any) {
+    expect(response.status).equals(400);
+    expect(response.body[0].type).equals("Warning");
+    expect(response.body[0].description).equals("Can't find FullSteam in clinic setting.");
+};
+
+/**
+ * 
  * @param {Object} response - GET /fullsteam/patient-payment-verify
  */
 function assertGetFullsteamPatientPaymentVerify(response: any){
-    expect(response.body).to.have.keys('entityId','clinicId','clinicLogo','clinicUid','clinicName','patientId','patientCode','patientName','patientZipCode','appointmentDate','authorId','amount','servicesAmount','productsAmount','copayAmount','collectingCopayAmount','isCollectingCopay','unallocatedAmount','adjustment','saleType','isValid','message');
+    expect(response.body).to.have.keys('entityId','clinicId','clinicLogo','clinicUid','clinicName','patientId','patientCode','patientName','patientZipCode','appointmentDate','authorId','calendarEventId','amount','servicesAmount','productsAmount','copayAmount','collectingCopayAmount','isCollectingCopay','unallocatedAmount','adjustment','saleType','isValid','message');
 };
 
 export {
     assertGetAccountsById,
     assertGetChargesCancellation,
     assertGetFullsteamSso,
+    assertErrorOnGetFullsteamSSo,
     assertGetFullsteamPatientPaymentVerify
 }
