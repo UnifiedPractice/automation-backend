@@ -48,7 +48,6 @@ describe('Billing Endpoints - Sanity Tests', () => {
         it('should GET /fullsteam/sso', () => {
             const response = billingEndpoints.getFullsteamSso();
             response.then((response: any) => {
-                commonAssertions.assertIsSuccessfullResponse(response);
                 billingAssertions.assertErrorOnGetFullsteamSSo(response);
             });
             commonAssertions.assertResponseJsonContentType(response);
