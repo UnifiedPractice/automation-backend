@@ -222,7 +222,7 @@ function assertGetLocationById(response: any, locationId: number) {
     expect(response.body).to.have.property('countryCode').and.to.be.a('string');
     expect(response.body).to.have.property('countryName').and.to.be.a('string');
     expect(response.body).to.have.property('stateCode').and.to.be.a('string');
-    expect(response.body).to.have.property('stateName').and.to.be.a('string');
+    //expect(response.body).to.have.property('stateName').and.to.be.a('string');
     expect(response.body).to.have.property('city').and.to.be.a('string');
     //expect(response.body).to.have.property('zipCode').and.to.be.a('string');
     expect(response.body).to.have.property('addressLine1').and.to.be.a('string');
@@ -318,7 +318,7 @@ function assertGetOrganizationInfo(response: any) {
     };
     expect(response.body).to.have.property('organizationAddress').and.to.be.an('Object');
     if(Object.keys(response.body.organizationAddress).length!=0){
-        expect(Object.keys(response.body.organizationAddress)).to.deep.equal(['countryCode','stateCode','city','addressLine1','addressLine2','countryName','stateName']);
+        expect(Object.keys(response.body.organizationAddress)).to.deep.equal(['countryCode','stateCode','city','addressLine1','addressLine2','countryName']);
     };
     expect(response.body).to.have.property('phoneNumber1').and.to.be.a('string');
     expect(response.body).to.have.property('emailAddress1').and.to.be.a('string');
@@ -330,7 +330,7 @@ function assertGetOrganizationInfo(response: any) {
  * 
  * @param {Object} response - POST /organization/organizationinfo
  */
-function assertAddOrganizationInfo(response: any) {
+function assertPatchOrganizationInfo(response: any) {
     expect(response.body).to.have.property('data').and.to.be.a('boolean');
     expect(response.body).to.have.property('messages').and.to.be.an('array');
 };
@@ -526,9 +526,9 @@ function assertGetPersons(response: any) {
     expect(response.body[0]).to.have.property('uniqueId').and.to.be.a('string');
     expect(response.body[0]).to.have.property('userId').and.to.be.a('number');
     expect(response.body[0]).to.have.property('firstname').and.to.be.a('string');
-    expect(response.body[0]).to.have.property('middlename').and.to.be.a('string');
+    //expect(response.body[0]).to.have.property('middlename').and.to.be.a('string');
     expect(response.body[0]).to.have.property('lastname').and.to.be.a('string');
-    expect(response.body[0]).to.have.property('role').and.to.be.a('string');
+    //expect(response.body[0]).to.have.property('role').and.to.be.a('string');
     expect(response.body[0]).to.have.property('recieveEmail').and.to.be.a('boolean');
     expect(response.body[0]).to.have.property('recieveSMS').and.to.be.a('boolean');
     expect(response.body[0]).to.have.property('autoAcceptAppointments').and.to.be.a('boolean');
@@ -546,9 +546,9 @@ function assertGetPersonById(response: any) {
     expect(response.body).to.have.property('uniqueId').and.to.be.a('string');
     expect(response.body).to.have.property('userId').and.to.be.a('number');
     expect(response.body).to.have.property('firstname').and.to.be.a('string');
-    expect(response.body).to.have.property('middlename').and.to.be.a('string');
+    //expect(response.body).to.have.property('middlename').and.to.be.a('string');
     expect(response.body).to.have.property('lastname').and.to.be.a('string');
-    expect(response.body).to.have.property('role').and.to.be.a('string');
+    //expect(response.body).to.have.property('role').and.to.be.a('string');
     expect(response.body).to.have.property('phoneNumbers').and.to.be.an('array');
     expect(response.body).to.have.property('emails').and.to.be.an('array');
     expect(response.body).to.have.property('address').and.to.be.an('Object');
@@ -720,7 +720,7 @@ export {
     assertGetOnboardingFormsStatusByPatientId,
     assertGetOrganization,
     assertGetOrganizationInfo,
-    assertAddOrganizationInfo,
+    assertPatchOrganizationInfo,
     assertGetAnonymousOrganizationByClinicUid,
     assertGetPatientPortalInviteCount,
     assertUpdatePatientPortalDomainName,

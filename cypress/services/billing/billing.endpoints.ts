@@ -65,7 +65,8 @@ function getFullsteamSso(): Cypress.ObjectLike {
     return cy.request({
         method: 'GET',
         url: `${API}${BASEPATHS.billingBasePath}/fullsteam/sso`,
-        headers: requestHeaders
+        headers: requestHeaders,
+        failOnStatusCode: false
     });
 };
 

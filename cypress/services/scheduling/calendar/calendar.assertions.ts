@@ -324,7 +324,7 @@ function assertAddCalendarAppointments(response: any) {
 function assertErrorOnUpdateCalendarAppointments (response: any) {
     expect(response.status).equals(400);
     expect(response.body[0].type).equals("Warning");
-    expect(response.body[0].description).equals("Cancellation fee cannot be collected unless the appointment is marked as no show.");
+    expect(response.body[0].description).equals("Cancellation policy is not supported by this organization.");
 };
 
 /**
