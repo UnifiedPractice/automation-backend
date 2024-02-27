@@ -51,7 +51,7 @@ function assertErrorOnGetFullsteamSSo (response: any) {
  * @param {Object} response - GET /fullsteam/patient-payment-verify
  */
 function assertGetFullsteamPatientPaymentVerify(response: any){
-    expect(response.body).to.have.keys('entityId','clinicId','clinicLogo','clinicUid','clinicName','patientId','patientCode','patientName','patientZipCode','appointmentDate','authorId','calendarEventId','amount','servicesAmount','productsAmount','copayAmount','collectingCopayAmount','isCollectingCopay','unallocatedAmount','adjustment','saleType','isValid','message');
+    expect(response.body).to.have.keys('entityId','clinicId','clinicUid','patientId','appointmentDate','authorId','calendarEventId','amount','servicesAmount','productsAmount','collectingCopayAmount','isCollectingCopay','unallocatedAmount','adjustment','saleType','isValid','message');
 };
 
 export {
