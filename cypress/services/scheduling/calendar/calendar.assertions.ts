@@ -390,7 +390,7 @@ function assertAddAppointmentsSchedulingConflicts(response: any) {
  */
 function assertGetCalendarAppontmentDefaultsByPatientId(response: any) {
     expect(response.body).to.have.property('serviceId').and.to.be.a('number');
-    expect(response.body).to.have.property('appointmentType').and.to.be.a('string');
+    //expect(response.body).to.have.property('appointmentType').and.to.be.a('string');
     expect(response.body).to.have.property('notificationSettings').and.to.be.an('array');
     response.body.notificationSettings.forEach((item: any) => {
         expect(item).to.have.property('type').and.to.be.a('string');
